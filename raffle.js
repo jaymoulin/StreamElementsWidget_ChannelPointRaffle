@@ -1,28 +1,28 @@
 const sleep = require('./tools').sleep
 
 let shuffle = function (o) {
-    for (let j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    for (let j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x) ;
     return o;
 };
 
 class wheel {
-    constructor(prize=[]) {
-        this.angleCurrent= 0
-        this.angleDelta= 0
-        this.canvasContext= null;
-        this.canvasElement= null;
-        this.centerX= 300;
-        this.centerY= 300;
-        this.colorCache= [];
-        this.downTime= 12000;
-        this.frames= 0;
-        this.maxSpeed= Math.PI / 16;
-        this.segments= prize;
-        this.size= 290;
-        this.spinStart= 0;
-        this.timerDelay= 7;
-        this.timerHandle= 0
-        this.upTime= 1000;
+    constructor(prize) {
+        this.angleCurrent = 0;
+        this.angleDelta = 0;
+        this.canvasContext = null;
+        this.canvasElement = null;
+        this.centerX = 300;
+        this.centerY = 300;
+        this.colorCache = [];
+        this.downTime = 12000;
+        this.frames = 0;
+        this.maxSpeed = Math.PI / 16;
+        this.segments = prize;
+        this.size = 290;
+        this.spinStart = 0;
+        this.timerDelay = 7;
+        this.timerHandle = 0
+        this.upTime = 1000;
     }
 
     spin() {
@@ -31,7 +31,7 @@ class wheel {
             this.spinStart = new Date().getTime();
             this.maxSpeed = Math.PI / (16 + (Math.random() * 10)); // Randomly vary how hard the spin is
             this.frames = 0;
-            this.timerHandle = setInterval(this.onTimerTick, this.timerDelay);
+            this.timerHandle = setInterval(this.onTimerTick.bind(this), this.timerDelay);
             this.canvasElement.dispatchEvent(new Event('wheel-start'));
         }
     }
@@ -65,7 +65,7 @@ class wheel {
             this.timerHandle = 0;
             this.angleDelta = 0;
             let i = this.segments.length - Math.floor((this.angleCurrent / (Math.PI * 2)) * this.segments.length) - 1;
-            this.canvasElement.dispatchEvent(new CustomEvent('wheel-finished', {detail:this.segments[i]}));
+            this.canvasElement.dispatchEvent(new CustomEvent('wheel-finished', {detail: this.segments[i]}));
         }
     }
 
@@ -265,6 +265,9 @@ class Raffle {
     }
 
     canHandle(message) {
+        console.log('here')
+        console.log(this.settings.allowed)
+        console.log(message['data']['redemption']['reward']['id'])
         return (
             message &&
             message.type &&
@@ -283,7 +286,7 @@ class Raffle {
         let reward = message.data['redemption']['reward'];
         this.player = message.data['redemption']['user']['display_name'];
         this.winner.innerText = this._replaceAll(this.settings.playText, '{user}', this.player)
-        this.winner.innerText = this._replaceAll(this.winner.innerText,'{price}', reward['cost'])
+        this.winner.innerText = this._replaceAll(this.winner.innerText, '{price}', reward['cost'])
         this.container.setAttribute("class", "");
         console.log("Playing audio", this.audioUrl);
         try {
@@ -302,12 +305,12 @@ class Raffle {
             console.log("Audio playback error:", e);
         }
         await sleep(1000);
-        wheel.spin();
+        this.wheel.spin();
     }
 
-    async wheelFinishedEvent (event) {
+    async wheelFinishedEvent(event) {
         this.winner.innerText = this._replaceAll(this.settings.wonText, '{user}', this.player)
-        this.winner.innerText = this._replaceAll(this.winner.innerText,'{reward}', event.detail)
+        this.winner.innerText = this._replaceAll(this.winner.innerText, '{reward}', event.detail)
         await sleep(3000);
         this.container.setAttribute("class", "hide");
     }
