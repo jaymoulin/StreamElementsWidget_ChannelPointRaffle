@@ -5,96 +5,98 @@ let shuffle = function (o) {
     return o;
 };
 
-const wheel = {
-    angleCurrent: 0,
-    angleDelta: 0,
-    canvasContext: null,
-    canvasElement: null,
-    centerX: 300,
-    centerY: 300,
-    colorCache: [],
-    downTime: 12000,
-    frames: 0,
-    maxSpeed: Math.PI / 16,
-    segments: [],
-    size: 290,
-    spinStart: 0,
-    timerDelay: 7,
-    timerHandle: 0,
-    upTime: 1000,
+class wheel {
+    constructor(prize=[]) {
+        this.angleCurrent= 0
+        this.angleDelta= 0
+        this.canvasContext= null;
+        this.canvasElement= null;
+        this.centerX= 300;
+        this.centerY= 300;
+        this.colorCache= [];
+        this.downTime= 12000;
+        this.frames= 0;
+        this.maxSpeed= Math.PI / 16;
+        this.segments= prize;
+        this.size= 290;
+        this.spinStart= 0;
+        this.timerDelay= 7;
+        this.timerHandle= 0
+        this.upTime= 1000;
+    }
 
-    spin: function () {
+    spin() {
         // Start the wheel only if it's not already spinning
-        if (wheel.timerHandle === 0) {
-            wheel.spinStart = new Date().getTime();
-            wheel.maxSpeed = Math.PI / (16 + (Math.random() * 10)); // Randomly vary how hard the spin is
-            wheel.frames = 0;
-            wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
-            wheel.canvasElement.dispatchEvent(new Event('wheel-start'));
+        if (this.timerHandle === 0) {
+            this.spinStart = new Date().getTime();
+            this.maxSpeed = Math.PI / (16 + (Math.random() * 10)); // Randomly vary how hard the spin is
+            this.frames = 0;
+            this.timerHandle = setInterval(this.onTimerTick, this.timerDelay);
+            this.canvasElement.dispatchEvent(new Event('wheel-start'));
         }
-    },
+    }
 
-    onTimerTick: function () {
-        wheel.frames++;
-        wheel.draw();
+    onTimerTick() {
+        this.frames++;
+        this.draw();
 
-        let duration = (new Date().getTime() - wheel.spinStart);
+        let duration = (new Date().getTime() - this.spinStart);
         let progress = 0;
         let finished = false;
 
-        if (duration < wheel.upTime) {
-            progress = duration / wheel.upTime;
-            wheel.angleDelta = wheel.maxSpeed * Math.sin(progress * Math.PI / 2);
+        if (duration < this.upTime) {
+            progress = duration / this.upTime;
+            this.angleDelta = this.maxSpeed * Math.sin(progress * Math.PI / 2);
         } else {
-            progress = duration / wheel.downTime;
-            wheel.angleDelta = wheel.maxSpeed * Math.sin(progress * Math.PI / 2 + Math.PI / 2);
+            progress = duration / this.downTime;
+            this.angleDelta = this.maxSpeed * Math.sin(progress * Math.PI / 2 + Math.PI / 2);
             if (progress >= 1) {
                 finished = true;
             }
         }
 
-        wheel.angleCurrent += wheel.angleDelta;
-        while (wheel.angleCurrent >= Math.PI * 2)
+        this.angleCurrent += this.angleDelta;
+        while (this.angleCurrent >= Math.PI * 2)
             // Keep the angle in a reasonable range
-            wheel.angleCurrent -= Math.PI * 2;
+            this.angleCurrent -= Math.PI * 2;
 
         if (finished) {
-            clearInterval(wheel.timerHandle);
-            wheel.timerHandle = 0;
-            wheel.angleDelta = 0;
-            let i = wheel.segments.length - Math.floor((wheel.angleCurrent / (Math.PI * 2)) * wheel.segments.length) - 1;
-            wheel.canvasElement.dispatchEvent(new CustomEvent('wheel-finished', {detail:wheel.segments[i]}));
+            clearInterval(this.timerHandle);
+            this.timerHandle = 0;
+            this.angleDelta = 0;
+            let i = this.segments.length - Math.floor((this.angleCurrent / (Math.PI * 2)) * this.segments.length) - 1;
+            this.canvasElement.dispatchEvent(new CustomEvent('wheel-finished', {detail:this.segments[i]}));
         }
-    },
+    }
 
-    init: function (spinTime) {
+    init(spinTime) {
         try {
-            wheel.downTime = spinTime;
-            wheel.initWheel();
-            wheel.initCanvas();
-            wheel.draw();
+            this.downTime = spinTime;
+            this.initWheel();
+            this.initCanvas();
+            this.draw();
         } catch (exceptionData) {
             console.error('Wheel is not loaded ' + exceptionData);
         }
-    },
+    }
 
-    initCanvas: function () {
+    initCanvas() {
         let canvas = document.getElementById('canvas');
-        wheel.canvasElement = canvas;
-        wheel.canvasContext = canvas.getContext('2d');
-    },
+        this.canvasElement = canvas;
+        this.canvasContext = canvas.getContext('2d');
+    }
 
-    initWheel: function () {
+    initWheel() {
         shuffle(spectrum);
-    },
+    }
 
-    update: function () {
+    update() {
         // Ensure we start mid way on a item
-        let r = Math.floor(Math.random() * wheel.segments.length);
+        let r = Math.floor(Math.random() * this.segments.length);
         //let r = 0;
-        wheel.angleCurrent = ((r + 0.5) / wheel.segments.length) * Math.PI * 2;
+        this.angleCurrent = ((r + 0.5) / this.segments.length) * Math.PI * 2;
 
-        let segments = wheel.segments;
+        let segments = this.segments;
         let len = segments.length;
         let colorLen = spectrum.length;
 
@@ -103,26 +105,26 @@ const wheel = {
             let color = spectrum[i % colorLen];
             colorCache.push(color);
         }
-        wheel.colorCache = colorCache;
-        wheel.draw();
-    },
+        this.colorCache = colorCache;
+        this.draw();
+    }
 
-    draw: function () {
-        wheel.clear();
-        wheel.drawWheel();
-        wheel.drawNeedle();
-    },
+    draw() {
+        this.clear();
+        this.drawWheel();
+        this.drawNeedle();
+    }
 
-    clear: function () {
-        let ctx = wheel.canvasContext;
+    clear() {
+        let ctx = this.canvasContext;
         ctx.clearRect(0, 0, 1600, 800);
-    },
+    }
 
-    drawNeedle: function () {
-        let ctx = wheel.canvasContext;
-        let centerX = wheel.centerX;
-        let centerY = wheel.centerY;
-        let size = wheel.size;
+    drawNeedle() {
+        let ctx = this.canvasContext;
+        let centerX = this.centerX;
+        let centerY = this.centerY;
+        let size = this.size;
 
         ctx.lineWidth = 1;
         ctx.strokeStyle = '#000000';
@@ -139,22 +141,22 @@ const wheel = {
         ctx.fill();
 
         // Which segment is being pointed to?
-        let i = wheel.segments.length - Math.floor((wheel.angleCurrent / (Math.PI * 2)) * wheel.segments.length) - 1;
+        let i = this.segments.length - Math.floor((this.angleCurrent / (Math.PI * 2)) * this.segments.length) - 1;
 
         // Now draw the winning name
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = '#000000';
         ctx.font = '2em Arial';
-        ctx.fillText(wheel.segments[i], centerX + size + 25, centerY);
-    },
+        ctx.fillText(this.segments[i], centerX + size + 25, centerY);
+    }
 
-    drawSegment: function (key, lastAngle, angle) {
-        let ctx = wheel.canvasContext;
-        let centerX = wheel.centerX;
-        let centerY = wheel.centerY;
-        let size = wheel.size;
-        let value = wheel.segments[key];
+    drawSegment(key, lastAngle, angle) {
+        let ctx = this.canvasContext;
+        let centerX = this.centerX;
+        let centerY = this.centerY;
+        let size = this.size;
+        let value = this.segments[key];
 
         ctx.save();
         ctx.beginPath();
@@ -167,7 +169,7 @@ const wheel = {
         //ctx.clip(); // It would be best to clip, but we can double performance without it
         ctx.closePath();
 
-        ctx.fillStyle = wheel.colorCache[key];
+        ctx.fillStyle = this.colorCache[key];
         ctx.fill();
         ctx.stroke();
 
@@ -181,19 +183,19 @@ const wheel = {
         ctx.restore();
 
         ctx.restore();
-    },
+    }
 
-    drawWheel: function () {
-        let ctx = wheel.canvasContext;
+    drawWheel() {
+        let ctx = this.canvasContext;
 
-        let angleCurrent = wheel.angleCurrent;
+        let angleCurrent = this.angleCurrent;
         let lastAngle = angleCurrent;
 
-        let len = wheel.segments.length;
+        let len = this.segments.length;
 
-        let centerX = wheel.centerX;
-        let centerY = wheel.centerY;
-        let size = wheel.size;
+        let centerX = this.centerX;
+        let centerY = this.centerY;
+        let size = this.size;
 
         let PI2 = Math.PI * 2;
 
@@ -205,7 +207,7 @@ const wheel = {
 
         for (let i = 1; i <= len; i++) {
             let angle = PI2 * (i / len) + angleCurrent;
-            wheel.drawSegment(i - 1, lastAngle, angle);
+            this.drawSegment(i - 1, lastAngle, angle);
             lastAngle = angle;
         }
         // Draw a center circle
@@ -227,7 +229,7 @@ const wheel = {
         ctx.strokeStyle = '#000000';
         ctx.stroke();
     }
-};
+}
 
 let spectrum = ['#0074D9', '#2ECC40', '#FFDC00', '#FF4136', '#FF851B', '#B10DC9'];
 
@@ -239,15 +241,15 @@ class Raffle {
         this.container = document.getElementById('wheel');
         this.winner = document.getElementById('wheel-winner');
         this.player = null
+        this.wheel = new wheel(this.prizes)
 
         this.init();
     }
 
     init() {
-        wheel.segments = this.prizes;
-        wheel.init(this.settings.spinTime);
-        wheel.update();
-        wheel.canvasElement.addEventListener('wheel-finished', this.wheelFinishedEvent.bind(this));
+        this.wheel.init(this.settings.spinTime);
+        this.wheel.update();
+        this.wheel.canvasElement.addEventListener('wheel-finished', this.wheelFinishedEvent.bind(this));
         this.winner.setAttribute("style", `color: ${this.settings.titleColor};font-size: ${this.settings.titleSize};${this.settings.titleStyle}`);
 
         setTimeout(function () {
