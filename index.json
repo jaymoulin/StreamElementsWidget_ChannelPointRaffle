@@ -1,0 +1,236 @@
+{
+  "allowed": {
+    "type": "text",
+    "label": "Channel Point redemption id",
+    "value": ""
+  },
+  "playText": {
+    "type": "text",
+    "label": "Main text for point redemption",
+    "value": "{user} spend {price} points for raffle"
+  },
+  "titleSize": {
+    "type": "number",
+    "label": "Size used for the main text (in px)",
+    "value": 50
+  },
+  "titleColor": {
+    "type": "colorpicker",
+    "label": "Color used for the main text",
+    "value": "purple"
+  },
+  "titleStyle": {
+    "type": "googleFont",
+    "label": "Main text font family",
+    "value": "Oswald"
+  },
+  "wonText": {
+    "type": "text",
+    "label": "Text when prize won",
+    "value": "{user} won {reward}"
+  },
+  "wheelAudioUrl": {
+    "type": "sound-input",
+    "label": "Audio played on redemption"
+  },
+  "wheelSpinTimeMs": {
+    "type": "number",
+    "label": "Wheel spin time (in ms)",
+    "value": 12000
+  },
+  "ignoredRedeemGroup0": {
+    "type": "hidden",
+    "label": "***************************",
+    "group": "Prizes"
+  },
+  "ignoredRedeemGroup1": {
+    "type": "hidden",
+    "label": "Prizes",
+    "group": "Prizes"
+  },
+  "ignoredRedeemGroup2": {
+    "type": "hidden",
+    "label": "***************************",
+    "group": "Prizes"
+  },
+  "prize1": {
+    "type": "text",
+    "label": "Prize 1",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize2": {
+    "type": "text",
+    "label": "Prize 2",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize3": {
+    "type": "text",
+    "label": "Prize 3",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize4": {
+    "type": "text",
+    "label": "Prize 4",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize5": {
+    "type": "text",
+    "label": "Prize 5",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize6": {
+    "type": "text",
+    "label": "Prize 6",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize7": {
+    "type": "text",
+    "label": "Prize 7",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize8": {
+    "type": "text",
+    "label": "Prize 8",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize9": {
+    "type": "text",
+    "label": "Prize 9",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize10": {
+    "type": "text",
+    "label": "Prize 10",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize11": {
+    "type": "text",
+    "label": "Prize 11",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize12": {
+    "type": "text",
+    "label": "Prize 12",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize13": {
+    "type": "text",
+    "label": "Prize 13",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize14": {
+    "type": "text",
+    "label": "Prize 14",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize15": {
+    "type": "text",
+    "label": "Prize 15",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize16": {
+    "type": "text",
+    "label": "Prize 16",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize17": {
+    "type": "text",
+    "label": "Prize 17",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize18": {
+    "type": "text",
+    "label": "Prize 18",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize19": {
+    "type": "text",
+    "label": "Prize 19",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize20": {
+    "type": "text",
+    "label": "Prize 20",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize21": {
+    "type": "text",
+    "label": "Prize 21",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize22": {
+    "type": "text",
+    "label": "Prize 22",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize23": {
+    "type": "text",
+    "label": "Prize 23",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize24": {
+    "type": "text",
+    "label": "Prize 24",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize25": {
+    "type": "text",
+    "label": "Prize 25",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize26": {
+    "type": "text",
+    "label": "Prize 26",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize27": {
+    "type": "text",
+    "label": "Prize 27",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize28": {
+    "type": "text",
+    "label": "Prize 28",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize29": {
+    "type": "text",
+    "label": "Prize 29",
+    "value": "",
+    "group": "Prizes"
+  },
+  "prize30": {
+    "type": "text",
+    "label": "Prize 30",
+    "value": "",
+    "group": "Prizes"
+  }
+}

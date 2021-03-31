@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family={{titleStyle}}');
+
+#wheel {
+    position: absolute;
+    top: 50%;
+    width: 95%;
+    transform: translate(0, -50%);
+    transition: opacity 0.5s linear;
+    font-family: "{{titleStyle}}", sans-serif;
+    font-weight: bold;
+}
+.hide {
+    opacity: 0;
+}
