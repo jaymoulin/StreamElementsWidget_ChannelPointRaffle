@@ -2,14 +2,14 @@
 const Raffle = require('./raffle')
 const sleep = require('./tools').sleep
 
-let titleColor = '{titleColor}',
-    titleSize = '{titleSize}',
-    titleStyle = 'font-weight: bold',
-    wheelAudioUrl = '{wheelAudioUrl}',
-    wheelSpinTimeMs = '{wheelSpinTimeMs}',
-    playText = '{playText}',
-    wonText = '{wonText}',
-    allowed = '{allowed}';
+let titleColor = `{titleColor}`,
+    titleSize = `{titleSize}`,
+    titleStyle = `font-weight: bold`,
+    wheelAudioUrl = `{wheelAudioUrl}`,
+    wheelSpinTimeMs = `{wheelSpinTimeMs}`,
+    playText = `{playText}`,
+    wonText = `{wonText}`,
+    allowed = `{allowed}`;
 
 let SETTINGS = {
     titleColor: titleColor,
@@ -23,36 +23,36 @@ let SETTINGS = {
 };
 
 let Prizes = [
-    "{prize1}",
-    "{prize2}",
-    "{prize3}",
-    "{prize4}",
-    "{prize5}",
-    "{prize6}",
-    "{prize7}",
-    "{prize8}",
-    "{prize9}",
-    "{prize10}",
-    "{prize11}",
-    "{prize12}",
-    "{prize13}",
-    "{prize14}",
-    "{prize15}",
-    "{prize16}",
-    "{prize17}",
-    "{prize18}",
-    "{prize19}",
-    "{prize20}",
-    "{prize21}",
-    "{prize22}",
-    "{prize23}",
-    "{prize24}",
-    "{prize25}",
-    "{prize26}",
-    "{prize27}",
-    "{prize28}",
-    "{prize29}",
-    "{prize30}",
+    `{prize1}`,
+    `{prize2}`,
+    `{prize3}`,
+    `{prize4}`,
+    `{prize5}`,
+    `{prize6}`,
+    `{prize7}`,
+    `{prize8}`,
+    `{prize9}`,
+    `{prize10}`,
+    `{prize11}`,
+    `{prize12}`,
+    `{prize13}`,
+    `{prize14}`,
+    `{prize15}`,
+    `{prize16}`,
+    `{prize17}`,
+    `{prize18}`,
+    `{prize19}`,
+    `{prize20}`,
+    `{prize21}`,
+    `{prize22}`,
+    `{prize23}`,
+    `{prize24}`,
+    `{prize25}`,
+    `{prize26}`,
+    `{prize27}`,
+    `{prize28}`,
+    `{prize29}`,
+    `{prize30}`,
 ]
 
 window.addEventListener('onWidgetLoad', function (obj) {
@@ -398,9 +398,6 @@ class Raffle {
     }
 
     canHandle(message) {
-        console.log('here')
-        console.log(this.settings.allowed)
-        console.log(message['data']['redemption']['reward']['id'])
         return (
             message &&
             message.type &&
@@ -450,6 +447,7 @@ class Raffle {
 }
 
 module.exports = Raffle
+
 },{"./tools":3}],3:[function(require,module,exports){
 module.exports = {
     sleep: function (milliseconds) {

@@ -265,9 +265,6 @@ class Raffle {
     }
 
     canHandle(message) {
-        console.log('here')
-        console.log(this.settings.allowed)
-        console.log(message['data']['redemption']['reward']['id'])
         return (
             message &&
             message.type &&
