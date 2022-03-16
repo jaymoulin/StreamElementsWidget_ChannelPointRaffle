@@ -1,6 +1,6 @@
-# Channel Point Redeemer
+# StreamElements Widget - Channel Point Raffle
 
-Displays a video/image and plays a sound when channel points are redeemed.
+Launch a raffle with a specific Channel Point Redeem
 
 [![PayPal donation](https://github.com/jaymoulin/jaymoulin.github.io/raw/master/ppl.png "PayPal donation")](https://www.paypal.me/jaymoulin)
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png "Buy me a coffee")](https://www.buymeacoffee.com/jaymoulin)
